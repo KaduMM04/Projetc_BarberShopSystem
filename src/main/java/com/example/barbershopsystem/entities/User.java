@@ -9,15 +9,25 @@ public abstract class User {
 
     private Long id;
     private String name;
+    private String phoneNumber;
     private String email;
     private String password;
 
-    public User(Long id, String name, String email, String password) {
+    public User(Long id, String name, String phoneNumber, String email, String password) {
         this.id = id;
         this.name = name;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
     }
+
+    public User(Long id, String name, String phoneNumber, String email) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
 
     public Long getId() {
         return id;
@@ -33,6 +43,14 @@ public abstract class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
