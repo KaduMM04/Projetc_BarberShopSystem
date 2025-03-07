@@ -1,9 +1,6 @@
 package com.example.barbershopsystem.entities;
 
 import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
