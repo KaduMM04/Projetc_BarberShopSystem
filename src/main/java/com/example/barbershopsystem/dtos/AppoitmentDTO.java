@@ -5,18 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 
-public class ClientDTO {
+public class AppoitmentDTO {
 
     private Long id;
-    private String name;
-    private String email;
-    private String phoneNumber;
-    private String shortName;
+    private Long barberId;
+    private Long clientId;
+    private LocalDateTime appointmentDate;
 
 }
