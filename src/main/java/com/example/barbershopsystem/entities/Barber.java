@@ -1,5 +1,6 @@
 package com.example.barbershopsystem.entities;
 
+import com.example.barbershopsystem.enums.BarberRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
@@ -27,4 +28,10 @@ public class Barber extends User {
     private List<Client>  clients;
 
 
+    public Barber(Long id, String name, String phoneNumber, String email, String password, BarberRole role, List<Appointment> appointments, List<Client> clients) {
+        super(id, name, phoneNumber, email, password);
+        this.role = role;
+        this.appointments = appointments;
+        this.clients = clients;
+    }
 }
