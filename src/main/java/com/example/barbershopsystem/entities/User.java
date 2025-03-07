@@ -1,5 +1,6 @@
 package com.example.barbershopsystem.entities;
 
+import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 import java.util.Objects;
@@ -7,11 +8,14 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class User {
 
+    @Id
     private Long id;
     private String name;
     private String phoneNumber;
     private String email;
     private String password;
+
+    public User() {}
 
     public User(Long id, String name, String phoneNumber, String email, String password) {
         this.id = id;
