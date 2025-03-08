@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 
-public class AppoitmentDTO {
+public class AppointmentDTO {
 
     private Long id;
     private Long barberId;
