@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    List<Appointment> findByDate(LocalDateTime date);
+    List<Appointment> findByAppointmentDate(LocalDateTime appointmentDate);
 
     List<Appointment> findByBarberId(Long id);
 

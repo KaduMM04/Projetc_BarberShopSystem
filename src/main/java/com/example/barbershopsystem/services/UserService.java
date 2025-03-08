@@ -21,8 +21,4 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User with this id not found" + id));
     }
 
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User with this email not found" + email));
-    }
 }

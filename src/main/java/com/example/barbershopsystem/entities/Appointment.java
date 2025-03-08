@@ -29,7 +29,7 @@ public class Appointment {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @Column(nullable = false)
+    @Column(name = "appointment_date")
     private LocalDateTime appointmentDate;
 
 }

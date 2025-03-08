@@ -27,11 +27,39 @@ public class Barber extends User {
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Client> clients;
 
-
     public Barber(Long id, String name, String phoneNumber, String email, String password, BarberRole role, List<Appointment> appointments, List<Client> clients) {
         super(id, name, phoneNumber, email, password);
         this.role = role;
         this.appointments = appointments;
+        this.clients = clients;
+    }
+
+    public Barber(Long id, String name, String phoneNumber, String email, String password, BarberRole role) {
+        super(id, name, phoneNumber, email, password);
+        this.role = role;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public BarberRole getRole() {
+        return role;
+    }
+
+    public void setRole(BarberRole role) {
+        this.role = role;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
         this.clients = clients;
     }
 }

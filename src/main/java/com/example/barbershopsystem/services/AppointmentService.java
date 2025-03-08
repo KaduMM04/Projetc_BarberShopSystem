@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class AppointmentService {
 
     @Autowired
-    AppointmentRepository appointmentRepository;
+    private AppointmentRepository appointmentRepository;
 
     @Autowired
     private BarberRepository barberRepository;
@@ -27,8 +27,18 @@ public class AppointmentService {
     private ClientRepository clientRepository;
 
 
-    public Appointment saveAppointment(Appointment appointment) {
-        return appointmentRepository.save(appointment);
+    public AppointmentDTO saveAppointment(AppointmentDTO appointmentDTO) {
+
+        Barber barber = barberRepository.findById(appointmentDTO.getBarberId())
+                .orElseThrow(() -> new RuntimeException("Barber not found"));
+
+        Client client = clientRepository.findById(appointmentDTO.getClientId())
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+        Appointment appointment = new Appointment(null, barber, client, appointmentDTO.getAppointmentDate());
+        Appointment savedAppointment = appointmentRepository.save(appointment);
+
+        return convertToDTO(savedAppointment);
     }
 
     public List<AppointmentDTO> getAllAppointments() {
@@ -38,8 +48,8 @@ public class AppointmentService {
                 collect(Collectors.toList());
     }
 
-    public List<AppointmentDTO> getAppointmentsByDate(LocalDateTime date) {
-        List<Appointment> appointments = appointmentRepository.findByDate(date);
+    public List<AppointmentDTO> getAppointmentsByDate(LocalDateTime appoimentDate) {
+        List<Appointment> appointments = appointmentRepository.findByAppointmentDate(appoimentDate);
         return appointments
                 .stream()
                 .map(this::convertToDTO)
@@ -55,7 +65,7 @@ public class AppointmentService {
     }
 
     public List<AppointmentDTO> getClientAppointments(Long clientId) {
-        List<Appointment> appointments = appointmentRepository.findByBarberId(clientId);
+        List<Appointment> appointments = appointmentRepository.findByClientId(clientId);
         return appointments
                 .stream()
                 .map(this::convertToDTO)

@@ -1,14 +1,20 @@
 package com.example.barbershopsystem.entities;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
+
 import java.util.Objects;
+
+
 
 @MappedSuperclass
 public abstract class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String phoneNumber;
@@ -31,7 +37,6 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-
 
     public Long getId() {
         return id;

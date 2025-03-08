@@ -19,9 +19,9 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping
-    public ResponseEntity<Client> saveClient(@RequestBody Client client) {
-        clientService.saveClient(client);
-        return ResponseEntity.status(HttpStatus.CREATED).body(client);
+    public ResponseEntity<ClientDTO> saveClient(@RequestBody ClientDTO clientDTO) {
+        ClientDTO savedClientDTO = clientService.saveClient(clientDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedClientDTO );
     }
 
     @GetMapping

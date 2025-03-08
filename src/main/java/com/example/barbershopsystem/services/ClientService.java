@@ -4,6 +4,7 @@ import com.example.barbershopsystem.dtos.BarberDTO;
 import com.example.barbershopsystem.dtos.ClientDTO;
 import com.example.barbershopsystem.entities.Barber;
 import com.example.barbershopsystem.entities.Client;
+import com.example.barbershopsystem.repositories.BarberRepository;
 import com.example.barbershopsystem.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,20 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public Client saveClient(Client client){
-        return clientRepository.save(client);
+    @Autowired
+    private BarberRepository barberRepository;
+
+    public ClientDTO saveClient(ClientDTO clientDTO) {
+        Barber barber = barberRepository.findById(clientDTO.getBarberId())
+                .orElseThrow(() -> new RuntimeException("Barber not found"));
+
+        Client client = new Client(null, clientDTO.getName(), clientDTO.getPhoneNumber(), clientDTO.getEmail(), clientDTO.getShortName(), barber);
+
+        Client savedClient = clientRepository.save(client);
+
+        return convertToDTO(savedClient);
     }
+
 
     public List<ClientDTO> getAllClients(){
         return clientRepository.findAll()
@@ -67,6 +79,7 @@ public class ClientService {
         dto.setEmail(client.getEmail());
         dto.setPhoneNumber(client.getPhoneNumber());
         dto.setShortName(client.getShortName());
+        dto.setBarberId(client.getBarber().getId());
         return dto;
     }
 }

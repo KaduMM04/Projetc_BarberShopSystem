@@ -15,6 +15,7 @@ public class BarberService {
 
     @Autowired
     private BarberRepository barberRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -61,15 +62,17 @@ public class BarberService {
         return convertToDTO(updatedBarber);
     }
 
-    private BarberDTO convertToDTO(Barber temp) {
+    public BarberDTO convertToDTO(Barber temp) {
         BarberDTO dto = new BarberDTO();
         dto.setId(temp.getId());
         dto.setName(temp.getName());
         dto.setPhoneNumber(temp.getPhoneNumber());
         dto.setEmail(temp.getEmail());
+        dto.setPassword(temp.getPassword());
         dto.setRole(temp.getRole());
         return dto;
     }
+
 }
 
 

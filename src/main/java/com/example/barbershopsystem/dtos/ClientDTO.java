@@ -1,5 +1,6 @@
 package com.example.barbershopsystem.dtos;
 
+import com.example.barbershopsystem.entities.Barber;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,6 @@ public class ClientDTO {
     private String email;
     private String phoneNumber;
     private String shortName;
+    private Long barberId;
 
 }
