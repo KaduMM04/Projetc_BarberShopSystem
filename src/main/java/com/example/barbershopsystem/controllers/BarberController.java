@@ -41,12 +41,12 @@ public class BarberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BarberDTO> updateBarberById(@RequestBody BarberDTO barber, @PathVariable Long id) {
+    public ResponseEntity<BarberDTO> updateBarber(@RequestBody BarberDTO barber, @PathVariable Long id) {
         return ResponseEntity.ok(barberService.updateBarber(id, barber));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BarberDTO> deleteBarberById(@PathVariable Long id) {
+    public ResponseEntity<BarberDTO> deleteBarber(@PathVariable Long id) {
         barberService.deleteBarberById(id);
         return ResponseEntity.noContent().build();
     }

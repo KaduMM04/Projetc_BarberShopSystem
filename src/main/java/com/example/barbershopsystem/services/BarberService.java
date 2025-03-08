@@ -15,6 +15,7 @@ public class BarberService {
 
     @Autowired
     private BarberRepository barberRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -25,26 +26,26 @@ public class BarberService {
     public List<BarberDTO> getAllBarbers() {
         return barberRepository.findAll()
                 .stream()
-                .map(this::covertToDTO)
+                .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     public BarberDTO findBarberById(Long id) {
         Barber barber = barberRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Barber not found"));
-        return covertToDTO(barber);
+        return convertToDTO(barber);
     }
 
     public BarberDTO findBarberByEmail(String email) {
         Barber barber = barberRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Barber with email not found" + email));
-        return covertToDTO(barber);
+        return convertToDTO(barber);
     }
 
     public void deleteBarberById(Long id) {
         Barber barber = barberRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("Barber not found"));
-        barberRepository.deleteById(id);
+        barberRepository.delete(barber);
     }
 
     public BarberDTO updateBarber(Long id, BarberDTO barberDTO) {
@@ -58,18 +59,20 @@ public class BarberService {
         existingBarber.setRole(barberDTO.getRole());
 
         Barber updatedBarber = barberRepository.save(existingBarber);
-        return covertToDTO(updatedBarber);
+        return convertToDTO(updatedBarber);
     }
 
-    private BarberDTO covertToDTO(Barber temp) {
+    public BarberDTO convertToDTO(Barber temp) {
         BarberDTO dto = new BarberDTO();
         dto.setId(temp.getId());
         dto.setName(temp.getName());
         dto.setPhoneNumber(temp.getPhoneNumber());
         dto.setEmail(temp.getEmail());
+        dto.setPassword(temp.getPassword());
         dto.setRole(temp.getRole());
         return dto;
     }
+
 }
 
 
