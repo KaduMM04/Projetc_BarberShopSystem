@@ -72,7 +72,6 @@ public class BarberService {
         dto.setRole(temp.getRole());
         return dto;
     }
-
 }
 
 
